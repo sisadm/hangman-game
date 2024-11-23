@@ -1,3 +1,4 @@
+
 import React from "react"
 
 
@@ -70,3 +71,4 @@ function GameBoard({word}) {
 
 
 export default GameBoard;
+
