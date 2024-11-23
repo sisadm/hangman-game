@@ -9,7 +9,9 @@ function App() {
 
   return (
     <>
+
       { word.length === 0 ? <Instructions word={word} setWord={setWord} /> : <GameBoard /> }
+
     </>
   )
 }
