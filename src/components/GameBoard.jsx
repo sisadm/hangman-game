@@ -1,19 +1,36 @@
-
 import React from "react"
+
+import { useState } from "react"
+
 
 
 function GameBoard({word}) {
+
+    const [letters, setLetters] = useState([]);
+
+
     var list = document.getElementById("list");
     var input = document.getElementById("input")
+
+    let testWord = 'test';
+
     var lives = 3;
-    const display = (word) =>{
-        for (i = 0; i<word.length; i++){
-            var listElement = document.createElement("li");
-            listElement.idName = `letter${[i]}`;
-            listElement.innerHTML = '_';
-            list.append(listElement);
-        };
+    const display = () =>{
+        const letterElement = testWord.split('').map(( _, index ) => ({
+            id: `letter${index}`,
+            value: '_',
+        }));
+
+        setLetters(letterElement);
     }
+
+    React.useEffect(() => { 
+        if(testWord.length > 0){
+            display()
+        }
+    }, []);
+
+    
 
     function submit(e){
         if (e === 'Enter'){
@@ -22,9 +39,9 @@ function GameBoard({word}) {
                 alert("Please enter a single letter")
                 UserInput.value = ''
             } else {
-                if (word.includes(UserInput)){
-                    for (i = 0; i<word.length; i++){
-                        if (UserInput === word[i]){
+                if (testWord.includes(UserInput)){
+                    for (i = 0; i<testWord.length; i++){
+                        if (UserInput === testWord[i]){
                             console.log('hello')
                         }
                     }
@@ -49,19 +66,26 @@ function GameBoard({word}) {
     return (
         <>
         <div>
-            <div class="lives">
-                <li>
-                    <ul><div class="life-1"></div></ul>
-                    <ul><div class="life-2"></div></ul>
-                    <ul><div class="life-3"></div></ul>
-                </li>
+            <div className="lives">
+                <ul>
+                    <li><div className="life-1">life 1</div></li>
+                    <li><div className="life-2">life 2</div></li>
+                    <li><div className="life-3">life 3</div></li>
+                </ul>
 
             </div>
-            <div class="letters">
-            <li id = "list">
-            </li>
+
+            <div className="letters">            
+                <ul id="list">
+                    {letters.map((letter) => (
+                        <li key={letter.id} id={letter.id}>
+                            {letter.value}
+                        </li>
+                    ))}
+                </ul>
             </div>
-            <div class = "input">
+
+            <div className = "input">
                 <input type="text" id="input" placeholder="Please enter a single letter" 
                 onKeyDown={submit()}></input>
             </div>
