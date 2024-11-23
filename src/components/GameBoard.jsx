@@ -15,7 +15,7 @@ function GameBoard({word}) {
         };
     }
 
-    input.addEventListener("keypress", function(e){
+    function submit(e){
         if (e === 'Enter'){
             const UserInput = document.getElementById("input").value.trim
             if (UserInput.length != 1){
@@ -45,7 +45,7 @@ function GameBoard({word}) {
 
             }
         }
-    })
+    }
     return (
         <>
         <div>
@@ -62,7 +62,8 @@ function GameBoard({word}) {
             </li>
             </div>
             <div class = "input">
-                <input type="text" id="input" placeholder="Please enter a single letter"></input>
+                <input type="text" id="input" placeholder="Please enter a single letter" 
+                onKeyDown={submit()}></input>
             </div>
         </div>
         </>
@@ -71,4 +72,6 @@ function GameBoard({word}) {
 
 
 
+
 export default GameBoard;
+
