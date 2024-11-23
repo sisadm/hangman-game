@@ -33,36 +33,31 @@ function GameBoard({word}) {
     
 
     function submit(e){
-        if (e === 'Enter'){
-            const UserInput = document.getElementById("input").value.trim
-            if (UserInput.length != 1){
-                alert("Please enter a single letter")
-                UserInput.value = ''
+        if (e.key === 'Enter'){
+            
+            // get the letter
+            const input = e.target.value.toLowerCase();
+            
+            // clear the input field
+            e.target.value = '';
+
+
+            if(testWord.includes(input)) {
+                // update the letters with the guessed letter 
+                const correctLetter = letters.map((letter, index) => ({
+                    ...letter, 
+                    value : testWord[index] === input ? input : letter.value,
+                }));
+
+                setLetters(correctLetter);
+
             } else {
-                if (testWord.includes(UserInput)){
-                    for (i = 0; i<testWord.length; i++){
-                        if (UserInput === testWord[i]){
-                            console.log('hello')
-                        }
-                    }
-                } else {
-                    alert("Wrong!")
-                    if (lives < 4){
-                        lives = lives - 1
-                        var life = document.life
-                        life.classList.toggle("lose-life")
-                    } else {
-                        if (lives = 0){
-                            console.log("hello")
-                        }
-                    }
-
-
-                }
-
+                console.log('not correct')
             }
         }
     }
+
+
     return (
         <>
         <div>
@@ -86,8 +81,12 @@ function GameBoard({word}) {
             </div>
 
             <div className = "input">
-                <input type="text" id="input" placeholder="Please enter a single letter" 
-                onKeyDown={submit()}></input>
+                <input 
+                type="text" 
+                id="input" 
+                placeholder="Please enter a single letter" 
+                maxLength={1}
+                onKeyDown={submit}></input>
             </div>
         </div>
         </>
