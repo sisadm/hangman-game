@@ -72,4 +72,6 @@ function GameBoard({word}) {
 
 
 
+
 export default GameBoard;
+
