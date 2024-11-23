@@ -10,7 +10,7 @@ function App() {
   return (
     <>
 
-      { word.length === 0 ? <Instructions word={word} setWord={setWord} /> : <GameBoard /> }
+      { word.length === 0 ? <Instructions word={word} setWord={setWord} /> : <GameBoard word={word}/> }
 
     </>
   )
