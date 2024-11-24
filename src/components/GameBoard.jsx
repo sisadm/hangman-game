@@ -6,13 +6,16 @@ import { useState } from "react"
 
 function GameBoard({word}) {
 
+    const wordArray = word;
+
+    console.log(wordArray[0])
+
+
+
     const [letters, setLetters] = useState([]);
 
 
-    var list = document.getElementById("list");
-    var input = document.getElementById("input")
-
-    let testWord = 'test';
+    let testWord = 'testmegez';
 
     var lives = 3;
     const display = () =>{
