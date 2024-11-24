@@ -2,36 +2,44 @@ import React from "react"
 
 import { useState } from "react"
 
+function randomNum(arr) {
+    return Math.floor((Math.random() * arr.length ) - 1)
+}
+
 
 
 function GameBoard({word}) {
 
-    const wordArray = word;
-
-    console.log(wordArray[0])
-
-
+    
 
     const [letters, setLetters] = useState([]);
+    const [lives, setLives] = useState(3);
+    const [pickedWord, setPickedWord] = useState('');
 
 
-    let testWord = 'testmegez';
+    
 
-    var lives = 3;
+    // var lives = 3;
     const display = () =>{
-        const letterElement = testWord.split('').map(( _, index ) => ({
+
+        const newPickedWord = word[randomNum(word)];
+
+        setPickedWord(newPickedWord)    
+        console.log(newPickedWord.split(''))    
+
+        const letterElement = newPickedWord.split('').map(( _, index ) => ({
             id: `letter${index}`,
             value: '_',
         }));
-
         setLetters(letterElement);
+        
     }
 
     React.useEffect(() => { 
-        if(testWord.length > 0){
-            display()
+        if(word.length > 0){
+            return display()
         }
-    }, []);
+    }, [word]);
 
     
 
@@ -44,12 +52,13 @@ function GameBoard({word}) {
             // clear the input field
             e.target.value = '';
 
+            console.log(pickedWord.includes(input), letters)
 
-            if(testWord.includes(input)) {
+            if(pickedWord.includes(input)) {
                 // update the letters with the guessed letter 
                 const correctLetter = letters.map((letter, index) => ({
                     ...letter, 
-                    value : testWord[index] === input ? input : letter.value,
+                    value : pickedWord[index] === input ? input : letter.value,
                 }));
 
                 setLetters(correctLetter);
